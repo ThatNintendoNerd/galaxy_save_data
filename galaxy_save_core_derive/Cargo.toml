@@ -1,0 +1,18 @@
+[package]
+name = "galaxy_save_core_derive"
+version = "0.1.0"
+authors = ["ThatNintendoNerd"]
+edition = "2024"
+description = "Defining derive macros for common traits used in the save data of Super Mario Galaxy and Super Mario Galaxy 2"
+documentation = "https://docs.rs/galaxy_save_core_derive"
+repository = "https://github.com/ThatNintendoNerd/galaxy_save_data"
+license = "MIT"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+darling = "0.21.2"
+proc-macro2 = "1.0.101"
+quote = "1.0.40"
+syn = "2.0.106"

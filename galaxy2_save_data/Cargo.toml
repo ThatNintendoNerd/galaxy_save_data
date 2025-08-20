@@ -1,0 +1,18 @@
+[package]
+name = "galaxy2_save_data"
+version = "0.1.0"
+authors = ["ThatNintendoNerd"]
+edition = "2024"
+description = "Reading and writing GameData.bin files from Super Mario Galaxy 2"
+documentation = "https://docs.rs/galaxy2_save_data"
+repository = "https://github.com/ThatNintendoNerd/galaxy_save_data"
+license = "MIT"
+
+[dependencies]
+bilge.workspace = true
+binrw.workspace = true
+galaxy_save_core = { path = "../galaxy_save_core", version = "^0.1.0" }
+serde = { workspace = true, optional = true }
+
+[features]
+serde = ["dep:serde", "galaxy_save_core/serde"]

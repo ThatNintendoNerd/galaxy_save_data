@@ -1,0 +1,19 @@
+[package]
+name = "galaxy_save_core"
+version = "0.1.0"
+authors = ["ThatNintendoNerd"]
+edition = "2024"
+description = "Defining common types and traits used in the save data of Super Mario Galaxy and Super Mario Galaxy 2"
+documentation = "https://docs.rs/galaxy_save_core"
+repository = "https://github.com/ThatNintendoNerd/galaxy_save_data"
+license = "MIT"
+autobins = false
+
+[dependencies]
+binrw.workspace = true
+galaxy_save_core_derive = { path = "../galaxy_save_core_derive", version = "^0.1.0" }
+serde = { workspace = true, optional = true }
+thiserror = "2.0.16"
+
+[features]
+serde = ["dep:serde"]

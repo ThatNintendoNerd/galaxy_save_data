@@ -1,0 +1,10 @@
+[package]
+name = "galaxy2_save_data_json"
+version = "0.1.0"
+authors = ["ThatNintendoNerd"]
+edition = "2024"
+
+[dependencies]
+clap.workspace = true
+galaxy2_save_data = { path = "../galaxy2_save_data", features = ["serde"] }
+serde_json.workspace = true
