@@ -4,7 +4,7 @@ use binrw::binrw;
 use galaxy_save_core::{
     bin::{BinaryDataContentHeaderSerializer, Chunk, HeaderSerializer},
     hash::HashCode,
-    time::OSTime,
+    time::Time,
 };
 
 #[cfg(feature = "serde")]
@@ -28,7 +28,7 @@ pub struct SysConfigData {
 
     /// The timestamp representing when the most recent message was sent to the Wii Message Board.
     #[header_serializer(name = "mTimeSent")]
-    pub time_sent: OSTime,
+    pub time_sent: Time,
 
     /// The number of bytes sent to the Wii Message Board from the date represented in [`time_sent`](#structfield.time_sent).
     #[header_serializer(name = "mSentBytes")]

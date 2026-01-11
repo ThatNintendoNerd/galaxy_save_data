@@ -1,7 +1,7 @@
 //! Types associated with miscellaneous user file state.
 
 use binrw::binrw;
-use galaxy_save_core::{bin::Chunk, hash::HashCode, time::OSTime};
+use galaxy_save_core::{bin::Chunk, hash::HashCode, time::Time};
 
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Default)]
 pub struct ConfigDataMisc {
     /// The timestamp representing when the user file was most recently saved.
-    pub last_modified: OSTime,
+    pub last_modified: Time,
 }
 
 impl Chunk for ConfigDataMisc {

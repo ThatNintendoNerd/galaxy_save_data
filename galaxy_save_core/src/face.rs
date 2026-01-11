@@ -50,9 +50,9 @@ use serde::{Deserialize, Serialize};
 /// which returns the current value of the time base register.
 /// [^2]: `scStartTime` is a variable from the Revolution Face Library which
 /// represents the epoch for Mii creation. It is equal to `11505369649262175`,
-/// or the approximate beginning of the year 2006 as an [`OSTime`](crate::time::OSTime).
+/// or the approximate beginning of the year 2006 as an `OSTime`.
 /// [^3]: `OSSecondsToTicks` is a macro from the OS library in the Revolution
-/// SDK which converts a given number of seconds into an [`OSTime`](crate::time::OSTime).
+/// SDK which converts a given number of seconds into an `OSTime`.
 ///
 /// ## MAC Address
 ///
