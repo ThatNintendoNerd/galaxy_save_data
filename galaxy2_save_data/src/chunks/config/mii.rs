@@ -32,9 +32,8 @@ impl Chunk for ConfigDataMii {
 /// A collection of packed binary settings for user file icon state.
 #[bitsize(8)]
 #[binrw]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[cfg_attr(feature = "serde", serde(transparent))]
-#[derive(DebugBits, DefaultBits, FromBits)]
+#[cfg_attr(feature = "serde", derive(SerializeBits, DeserializeBits))]
+#[derive(DebugBits, Clone, Copy, DefaultBits, FromBits)]
 #[repr(transparent)]
 pub struct ConfigDataMiiFlag {
     reserved: u1,

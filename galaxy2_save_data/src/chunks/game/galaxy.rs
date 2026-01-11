@@ -116,14 +116,7 @@ pub enum SaveDataStorageGalaxyState {
 /// The collection of packed binary settings for a galaxy.
 #[bitsize(8)]
 #[binrw]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[cfg_attr(
-    feature = "serde",
-    serde(
-        from = "ExpandedSaveDataStorageGalaxyFlag",
-        into = "ExpandedSaveDataStorageGalaxyFlag"
-    )
-)]
+#[cfg_attr(feature = "serde", derive(SerializeBits, DeserializeBits))]
 #[derive(DebugBits, Clone, Copy, DefaultBits, FromBits)]
 #[repr(transparent)]
 pub struct SaveDataStorageGalaxyFlag {
@@ -134,30 +127,6 @@ pub struct SaveDataStorageGalaxyFlag {
     pub comet: bool,
 
     reserved: u6,
-}
-
-#[cfg(feature = "serde")]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-struct ExpandedSaveDataStorageGalaxyFlag {
-    tico_coin: bool,
-    comet: bool,
-}
-
-#[cfg(feature = "serde")]
-impl From<SaveDataStorageGalaxyFlag> for ExpandedSaveDataStorageGalaxyFlag {
-    fn from(flag: SaveDataStorageGalaxyFlag) -> Self {
-        Self {
-            tico_coin: flag.tico_coin(),
-            comet: flag.comet(),
-        }
-    }
-}
-
-#[cfg(feature = "serde")]
-impl From<ExpandedSaveDataStorageGalaxyFlag> for SaveDataStorageGalaxyFlag {
-    fn from(flag: ExpandedSaveDataStorageGalaxyFlag) -> Self {
-        Self::new(flag.tico_coin, flag.comet)
-    }
 }
 
 /// A container for the state of a mission.
@@ -181,14 +150,7 @@ pub struct SaveDataStorageGalaxyScenario {
 /// The collection of packed binary settings for a mission.
 #[bitsize(8)]
 #[binrw]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[cfg_attr(
-    feature = "serde",
-    serde(
-        from = "ExpandedSaveDataStorageGalaxyScenarioFlag",
-        into = "ExpandedSaveDataStorageGalaxyScenarioFlag"
-    )
-)]
+#[cfg_attr(feature = "serde", derive(SerializeBits, DeserializeBits))]
 #[derive(DebugBits, Clone, Copy, DefaultBits, FromBits)]
 #[repr(transparent)]
 pub struct SaveDataStorageGalaxyScenarioFlag {
@@ -208,40 +170,4 @@ pub struct SaveDataStorageGalaxyScenarioFlag {
     pub intrusively_luigi: bool,
 
     reserved: u3,
-}
-
-#[cfg(feature = "serde")]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-struct ExpandedSaveDataStorageGalaxyScenarioFlag {
-    power_star: bool,
-    bronze_star: bool,
-    already_visited: bool,
-    ghost_luigi: bool,
-    intrusively_luigi: bool,
-}
-
-#[cfg(feature = "serde")]
-impl From<SaveDataStorageGalaxyScenarioFlag> for ExpandedSaveDataStorageGalaxyScenarioFlag {
-    fn from(flag: SaveDataStorageGalaxyScenarioFlag) -> Self {
-        Self {
-            power_star: flag.power_star(),
-            bronze_star: flag.bronze_star(),
-            already_visited: flag.already_visited(),
-            ghost_luigi: flag.ghost_luigi(),
-            intrusively_luigi: flag.intrusively_luigi(),
-        }
-    }
-}
-
-#[cfg(feature = "serde")]
-impl From<ExpandedSaveDataStorageGalaxyScenarioFlag> for SaveDataStorageGalaxyScenarioFlag {
-    fn from(flag: ExpandedSaveDataStorageGalaxyScenarioFlag) -> Self {
-        Self::new(
-            flag.power_star,
-            flag.bronze_star,
-            flag.already_visited,
-            flag.ghost_luigi,
-            flag.intrusively_luigi,
-        )
-    }
 }

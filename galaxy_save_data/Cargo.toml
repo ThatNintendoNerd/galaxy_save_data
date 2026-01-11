@@ -15,4 +15,4 @@ galaxy_save_core = { path = "../galaxy_save_core", version = "^0.1.0" }
 serde = { workspace = true, optional = true }
 
 [features]
-serde = ["dep:serde", "galaxy_save_core/serde"]
+serde = ["dep:serde", "bilge/serde", "galaxy_save_core/serde"]

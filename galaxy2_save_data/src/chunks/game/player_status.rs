@@ -64,14 +64,7 @@ impl Chunk for SaveDataStoragePlayerStatus {
 /// A collection of packed binary settings for player state.
 #[bitsize(8)]
 #[binrw]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[cfg_attr(
-    feature = "serde",
-    serde(
-        from = "ExpandedSaveDataStoragePlayerStatusFlag",
-        into = "ExpandedSaveDataStoragePlayerStatusFlag"
-    )
-)]
+#[cfg_attr(feature = "serde", derive(SerializeBits, DeserializeBits))]
 #[derive(DebugBits, Clone, Copy, DefaultBits, FromBits)]
 #[repr(transparent)]
 pub struct SaveDataStoragePlayerStatusFlag {
@@ -79,26 +72,4 @@ pub struct SaveDataStoragePlayerStatusFlag {
     pub player_luigi: bool,
 
     reserved: u7,
-}
-
-#[cfg(feature = "serde")]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-struct ExpandedSaveDataStoragePlayerStatusFlag {
-    player_luigi: bool,
-}
-
-#[cfg(feature = "serde")]
-impl From<SaveDataStoragePlayerStatusFlag> for ExpandedSaveDataStoragePlayerStatusFlag {
-    fn from(flag: SaveDataStoragePlayerStatusFlag) -> Self {
-        Self {
-            player_luigi: flag.player_luigi(),
-        }
-    }
-}
-
-#[cfg(feature = "serde")]
-impl From<ExpandedSaveDataStoragePlayerStatusFlag> for SaveDataStoragePlayerStatusFlag {
-    fn from(flag: ExpandedSaveDataStoragePlayerStatusFlag) -> Self {
-        Self::new(flag.player_luigi)
-    }
 }

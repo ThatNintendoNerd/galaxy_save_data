@@ -29,14 +29,7 @@ impl Chunk for ConfigDataMisc {
 /// A collection of packed binary settings for miscellaneous user file state.
 #[bitsize(8)]
 #[binrw]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[cfg_attr(
-    feature = "serde",
-    serde(
-        from = "ExpandedConfigDataMiscFlag",
-        into = "ExpandedConfigDataMiscFlag"
-    )
-)]
+#[cfg_attr(feature = "serde", derive(SerializeBits, DeserializeBits))]
 #[derive(DebugBits, Clone, Copy, FromBits)]
 #[repr(transparent)]
 pub struct ConfigDataMiscFlag {
@@ -61,35 +54,5 @@ pub struct ConfigDataMiscFlag {
 impl Default for ConfigDataMiscFlag {
     fn default() -> Self {
         Self::new(true, false, false)
-    }
-}
-
-#[cfg(feature = "serde")]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-struct ExpandedConfigDataMiscFlag {
-    last_loaded_mario: bool,
-    complete_ending_mario: bool,
-    complete_ending_luigi: bool,
-}
-
-#[cfg(feature = "serde")]
-impl From<ConfigDataMiscFlag> for ExpandedConfigDataMiscFlag {
-    fn from(flag: ConfigDataMiscFlag) -> Self {
-        Self {
-            last_loaded_mario: flag.last_loaded_mario(),
-            complete_ending_mario: flag.complete_ending_mario(),
-            complete_ending_luigi: flag.complete_ending_luigi(),
-        }
-    }
-}
-
-#[cfg(feature = "serde")]
-impl From<ExpandedConfigDataMiscFlag> for ConfigDataMiscFlag {
-    fn from(flag: ExpandedConfigDataMiscFlag) -> Self {
-        Self::new(
-            flag.last_loaded_mario,
-            flag.complete_ending_mario,
-            flag.complete_ending_luigi,
-        )
     }
 }
