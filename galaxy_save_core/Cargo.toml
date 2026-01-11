@@ -13,7 +13,7 @@ autobins = false
 binrw.workspace = true
 galaxy_save_core_derive = { path = "../galaxy_save_core_derive", version = "^0.1.0" }
 serde = { workspace = true, optional = true }
-thiserror = "2.0.16"
+thiserror = "2.0.17"
 
 [features]
 serde = ["dep:serde"]
