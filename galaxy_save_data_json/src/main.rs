@@ -17,7 +17,7 @@ fn read_data_write_json<P: AsRef<Path> + ToString>(
     check: bool,
 ) {
     let result = match platform {
-        Platform::Wii => {
+        Platform::Wii | Platform::ShieldTv => {
             if check && let Err(error) = SaveDataFile::check_be_file(&input_path) {
                 eprintln!("failed to validate file: {error}");
                 return;
@@ -25,7 +25,7 @@ fn read_data_write_json<P: AsRef<Path> + ToString>(
 
             SaveDataFile::read_be_file(&input_path)
         }
-        Platform::ShieldTv | Platform::Switch => {
+        Platform::Switch => {
             if check && let Err(error) = SaveDataFile::check_le_file(&input_path) {
                 eprintln!("failed to validate file: {error}");
                 return;
@@ -61,8 +61,8 @@ fn read_json_write_data<P: AsRef<Path>>(
                 .map(PathBuf::from)
                 .unwrap_or_else(|| input_path.as_ref().with_extension("bin"));
             let result = match platform {
-                Platform::Wii => save_data.write_be_file(output_path),
-                Platform::ShieldTv | Platform::Switch => save_data.write_le_file(output_path),
+                Platform::Wii | Platform::ShieldTv => save_data.write_be_file(output_path),
+                Platform::Switch => save_data.write_le_file(output_path),
             };
 
             result.expect("failed to write GameData.bin file");
