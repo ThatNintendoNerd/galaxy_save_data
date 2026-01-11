@@ -29,6 +29,6 @@ pub enum Platform {
     /// NVIDIA Shield TV
     ShieldTv,
 
-    /// Nintendo Switch
+    /// Nintendo Switch (Super Mario 3D All-Stars)
     Switch,
 }

@@ -36,17 +36,22 @@ pub struct SaveDataStorageGalaxy {
 
 impl SaveDataStorageGalaxy {
     /// Returns a reference to the [`SaveDataStorageGalaxyStage`] corresponding to the key.
-    pub fn get(&self, key: impl Into<HashCode>) -> Option<&SaveDataStorageGalaxyStage> {
-        let key = key.into().into_raw() as u16;
+    pub fn get(&self, galaxy_name: impl Into<HashCode>) -> Option<&SaveDataStorageGalaxyStage> {
+        let galaxy_name = galaxy_name.into().into_raw() as u16;
 
-        self.galaxy.iter().find(|v| v.galaxy_name == key)
+        self.galaxy.iter().find(|v| v.galaxy_name == galaxy_name)
     }
 
     /// Returns a mutable reference to the [`SaveDataStorageGalaxyStage`] corresponding to the key.
-    pub fn get_mut(&mut self, key: impl Into<HashCode>) -> Option<&mut SaveDataStorageGalaxyStage> {
-        let key = key.into().into_raw() as u16;
+    pub fn get_mut(
+        &mut self,
+        galaxy_name: impl Into<HashCode>,
+    ) -> Option<&mut SaveDataStorageGalaxyStage> {
+        let galaxy_name = galaxy_name.into().into_raw() as u16;
 
-        self.galaxy.iter_mut().find(|v| v.galaxy_name == key)
+        self.galaxy
+            .iter_mut()
+            .find(|v| v.galaxy_name == galaxy_name)
     }
 }
 
@@ -81,7 +86,7 @@ pub struct SaveDataStorageGalaxyStage {
     #[header_serializer(name = "mGalaxyState")]
     pub galaxy_state: SaveDataStorageGalaxyState,
 
-    /// The collection of binary settings.
+    /// The collection of packed binary settings.
     #[header_serializer(name = "mFlag")]
     pub flag: SaveDataStorageGalaxyFlag,
 
@@ -108,7 +113,7 @@ pub enum SaveDataStorageGalaxyState {
     Opened = 2,
 }
 
-/// The collection of binary settings for a galaxy.
+/// The collection of packed binary settings for a galaxy.
 #[bitsize(8)]
 #[binrw]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -168,12 +173,12 @@ pub struct SaveDataStorageGalaxyScenario {
     #[header_serializer(name = "mBestTime")]
     pub best_time: u32,
 
-    /// The collection of binary settings.
+    /// The collection of packed binary settings.
     #[header_serializer(name = "mFlag")]
     pub flag: SaveDataStorageGalaxyScenarioFlag,
 }
 
-/// The collection of binary settings for a mission.
+/// The collection of packed binary settings for a mission.
 #[bitsize(8)]
 #[binrw]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

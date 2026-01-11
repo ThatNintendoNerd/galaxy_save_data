@@ -1,4 +1,4 @@
-`GameData.bin` is the name of Super Mario Galaxy 2's save file. It is stored in `/title/00010000/534234##/data`, where `##` is the plaintext hexadecimal value for the letter that corresponds to the game's region (either SB4**J**, SB4**E**, SB4**P**, SB4**W**, or SB4**K**).
+`GameData.bin` is the name of Super Mario Galaxy 2's save file. On Wii, it is stored in `/title/00010000/534234##/data`, where `##` is the plaintext hexadecimal value for the letter that corresponds to the game's region (either SB4**J**, SB4**E**, SB4**P**, SB4**W**, or SB4**K**).
 
 # File Format
 
@@ -184,21 +184,21 @@ A data block dedicated to preserving user file icon state.
 | --- | --- | --- |
 | 0x00 | [BinaryDataChunkHolderChunkData](#binarydatachunkholderchunkdata) | The supplementary information for the data block. |
 | 0x0C.0 | 1 bit | **Unused**. Removed in Super Mario Galaxy 2. |
-| 0x0C.1 | 1 bit | **Unused**. Never tested or cleared; only set if the icon is of a Mii character. |
+| 0x0C.1 | 1 bit | **Unused**. Never tested or cleared; only set if the icon represents a Mii. |
 | 0x0C.2 | 6 bits | **Unused**. |
-| 0x0D | [RFLCreateID](#rflcreateid) | The unique identifier of the Mii character. |
+| 0x0D | [RFLCreateID](#rflcreateid) | The unique identifier of the Mii. |
 | 0x15 | u8 | The icon of the user file. |
 
 #### RFLCreateID
 
-A unique identifier for a Mii character.
+A unique identifier for a Mii.
 
 This data type originates from the Revolution Face Library.
 
 | Offset | Type | Description |
 | --- | --- | --- |
-| 0x00.7 | 1 bit | Determines if the Mii character was not distributed by Nintendo. |
-| 0x00.6 | 1 bit | Determines if the Mii character was created on another system. |
+| 0x00.7 | 1 bit | Determines if the Mii was not distributed by Nintendo. |
+| 0x00.6 | 1 bit | Determines if the Mii was created on another system. |
 | 0x00.5 | 1 bit | **Unknown**. |
 | 0x00.4 | 1 bit | **Unused**. |
 | 0x00.3 | 28 bits | The timestamp representing when the Mii character's gender was selected. |
@@ -237,10 +237,10 @@ A data block dedicated to preserving shared state between all user files.
 | 0x2C | bool | Determines if the player was encouraged to change their TV Type from 50 Hz to 60 Hz. |
 | 0x2D | [OSTime](#ostime) | The timestamp representing when the most recent message was sent to the Wii Message Board. |
 | 0x35 | u32 | The number of bytes sent to the Wii Message Board from the date represented in the previous field. |
-| 0x39 | u16 | The number of Star Bits stored with the banktoad. |
-| 0x3B | u16 | The greatest number of Star Bits stored with the banktoad. |
+| 0x39 | u16 | The number of banked Star Bits. |
+| 0x3B | u16 | The greatest number of banked Star Bits. |
 | 0x3D | u8 | The number of extra lives from another user file attached to a letter from Rosalina.
-| 0x3E | u16 | The sender of extra lives' hashed user file name. |
+| 0x3E | u16 | The sender of extra lives' hashed user file name, truncated to the least significant 16 bits. |
 
 # Common Data Types
 

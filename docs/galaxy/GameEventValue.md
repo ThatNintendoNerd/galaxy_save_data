@@ -6,7 +6,7 @@ A Game Event Value is a key-value pair for a 16-bit unsigned integer.
 
 > Penguin Race [Ocean Ring]/hi
 
-Represents the most significant bytes for the Sea Slide Galaxy's best race time, in frames.
+Represents the most significant bytes for the best race time in the second mission of the Sea Slide Galaxy, in frames.
 
 The default value is `0`.
 
@@ -14,7 +14,7 @@ The default value is `0`.
 
 > Penguin Race [Ocean Ring]/lo
 
-Represents the least significant bytes for the Sea Slide Galaxy's best race time, in frames.
+Represents the least significant bytes for the best race time in the second mission of the Sea Slide Galaxy, in frames.
 
 The default value is `5400`, or a time of `01:30:00`.
 
@@ -22,7 +22,7 @@ The default value is `5400`, or a time of `01:30:00`.
 
 > Teresa Race [Phantom]/hi
 
-Represents the most significant bytes for the Ghostly Galaxy's best race time, in frames.
+Represents the most significant bytes for the best race time in the second mission of the Ghostly Galaxy, in frames.
 
 The default value is `0`.
 
@@ -30,7 +30,7 @@ The default value is `0`.
 
 > Teresa Race [Phantom]/lo
 
-Represents the least significant bytes for the Ghostly Galaxy's best race time, in frames.
+Represents the least significant bytes for the best race time in the second mission of the Ghostly Galaxy, in frames.
 
 The default value is `5400`, or a time of `01:30:00`.
 
@@ -38,7 +38,7 @@ The default value is `5400`, or a time of `01:30:00`.
 
 > Teresa Race [Death Promenade]/hi
 
-Represents the most significant bytes for the Boo's Boneyard Galaxy's best race time, in frames.
+Represents the most significant bytes for the best race time in the first mission of the Boo's Boneyard Galaxy, in frames.
 
 The default value is `0`.
 
@@ -46,7 +46,7 @@ The default value is `0`.
 
 > Teresa Race [Death Promenade]/lo
 
-Represents the least significant bytes for the Boo's Boneyard Galaxy's best race time, in frames.
+Represents the least significant bytes for the best race time in the first mission of the Boo's Boneyard Galaxy, in frames.
 
 The default value is `5400`, or a time of `01:30:00`.
 
@@ -54,7 +54,7 @@ The default value is `5400`, or a time of `01:30:00`.
 
 > Surfing [Trial]/hi
 
-Represents the most significant bytes for the Loopdeeloop Galaxy's best race time, in frames.
+Represents the most significant bytes for the best race time in the first mission of the Loopdeeloop Galaxy, in frames.
 
 The default value is `0`.
 
@@ -62,7 +62,7 @@ The default value is `0`.
 
 > Surfing [Trial]/lo
 
-Represents the least significant bytes for the Loopdeeloop Galaxy's best race time, in frames.
+Represents the least significant bytes for the best race time in the first mission of the Loopdeeloop Galaxy, in frames.
 
 The default value is `5400`, or a time of `01:30:00`.
 
@@ -70,7 +70,7 @@ The default value is `5400`, or a time of `01:30:00`.
 
 > Surfing [Challenge]/hi
 
-Represents the most significant bytes for the Loopdeeswoop Galaxy's best race time, in frames.
+Represents the most significant bytes for the best race time in the first mission of the Loopdeeswoop Galaxy, in frames.
 
 The default value is `0`.
 
@@ -78,13 +78,13 @@ The default value is `0`.
 
 > Surfing [Challenge]/lo
 
-Represents the least significant bytes for the Loopdeeswoop Galaxy's best race time, in frames.
+Represents the least significant bytes for the best race time in the first mission of the Loopdeeswoop Galaxy, in frames.
 
 The default value is `5400`, or a time of `01:30:00`.
 
 ## LibraryOpenNewStarCount
 
-Represents the remaining number of Stars to collect after completing Bowser's Star Reactor before Rosalina's library can open.
+Represents the remaining number of Stars to collect after completing Bowser's Star Reactor before the Library can open.
 
 The default value is `1`.
 
@@ -92,14 +92,14 @@ The default value is `1`.
 
 > Picture Book Chapters Already Read
 
-Represents the number of chapters read in Rosalina's Story.
+Represents the number of chapters read in Rosalina's Storybook.
 
 The default value is `0`.
 
 ## MsgLedPattern
 
 > [!NOTE]
-> The following Game Event Value only exists in the Korean version of the game.
+> The following Game Event Value only exists in the original Korean and Chinese releases of the game.
 
 Represents a Boolean determining if the disc slot should illuminate when the mailtoad receives a letter.
 
@@ -115,22 +115,29 @@ The default value is `0xFF00`.
 
 Represents a bit field determining if an optional Warp Pad was activated.
 
+Warp Pads are assigned a bit index based on their objects' initialization order, given its `Obj_arg3` value is zero. The bits are reserved in the vanilla game as follows:
+
+```
+0b00000000_00000001 => Near the Library, activated using the Warp Pad off to the side of the Engine Room
+0b00000000_00000010 => In the Garage, activated using the Warp Pad behind the Garden
+```
+
 The default value is `0b00000000_00000000`.
 
 ## TicoGalaxyAlreadyTalk
 
 Represents a bit field determining if a Hungry Luma in the Comet Observatory was talked to.
 
-Hungry Lumas are arbitrarily assigned a bit index based on their objects' `Obj_arg7` value. The bits are reserved in the vanilla game as follows:
+Hungry Lumas are assigned a bit index based on their objects' `Obj_arg7` value. The bits are reserved in the vanilla game as follows:
 
 ```
-0b00000000_00000001 => The entrance to the Terrace
-0b00000000_00000010 => The entrance to the Fountain
-0b00000000_00000100 => The entrance to the Kitchen
-0b00000000_00001000 => The Gate
-0b00000000_00010000 => The entrance to the Garden
-0b00000000_00100000 => The entrance to the Engine Room
-0b00000000_01000000 => The entrance to the Bedroom
+0b00000000_00000001 => Near the Terrace
+0b00000000_00000010 => Near the Fountain
+0b00000000_00000100 => Near the Kitchen
+0b00000000_00001000 => Near the Gate
+0b00000000_00010000 => Near the Garden
+0b00000000_00100000 => Near the Engine Room
+0b00000000_01000000 => Near the Bedroom
 ```
 
 The default value is `0b00000000_00000000`.
@@ -139,7 +146,7 @@ The default value is `0b00000000_00000000`.
 
 Represents a bit field determining if a message from an actor was read by the player.
 
-Messages are arbitrarily assigned a bit index based on their last parameter. The bits are reserved in the vanilla game as follows:
+Messages are assigned a bit index based on their last parameter. The bits are reserved in the vanilla game as follows:
 
 ```
 0b00000000_00000001 => DiskGardenZone_Tico006 (Talking to the Yellow Luma on the starting planet of the Good Egg Galaxy's second mission)

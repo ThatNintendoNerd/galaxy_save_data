@@ -5,7 +5,7 @@ use binrw::binrw;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
-/// A unique identifier for a Mii character.
+/// A unique identifier for a Mii.
 ///
 /// # Format
 ///
@@ -22,10 +22,10 @@ use serde::{Deserialize, Serialize};
 /// - `0b0010` - Unknown.
 ///   - This flag is checked by the `RFLiIsTemporaryID` function.
 ///   - This flag is set by the `RFLiSetTemporaryID` function.
-/// - `0b0100` - Determines if the Mii character was created on another system.
-///   - If this flag is set, the Mii character will wear blue pants.
-/// - `0b1000` - Determines if the Mii character was not distributed by Nintendo.
-///   - If this flag is set, the Mii character will not wear yellow pants.
+/// - `0b0100` - Determines if the Mii was created on another system.
+///   - If this flag is set, the Mii will wear blue pants.
+/// - `0b1000` - Determines if the Mii was not distributed by Nintendo.
+///   - If this flag is set, the Mii will not wear yellow pants.
 ///
 /// ## Timestamp
 ///
@@ -48,12 +48,11 @@ use serde::{Deserialize, Serialize};
 ///
 /// [^1]: `OSGetTime` is a function from the OS library in the Revolution SDK
 /// which returns the current value of the time base register.
-/// [^2]: `scStartTime` is a variable from RVLFaceLibrary which represents the
-/// epoch for Mii character creation. It is equal to `11505369649262175`, or
-/// the approximate beginning of the 2006 new year as an [`OSTime`](crate::time::OSTime).
+/// [^2]: `scStartTime` is a variable from the Revolution Face Library which
+/// represents the epoch for Mii creation. It is equal to `11505369649262175`,
+/// or the approximate beginning of the year 2006 as an [`OSTime`](crate::time::OSTime).
 /// [^3]: `OSSecondsToTicks` is a macro from the OS library in the Revolution
-/// SDK which converts a given number of seconds into an
-/// [`OSTime`](crate::time::OSTime).
+/// SDK which converts a given number of seconds into an [`OSTime`](crate::time::OSTime).
 ///
 /// ## MAC Address
 ///
@@ -78,10 +77,10 @@ use serde::{Deserialize, Serialize};
 /// }
 /// ```
 ///
-/// [^4]: `scFirstMakerCode` is an array from RVLFaceLibrary which represents
-/// the first three bytes of a potential MAC address. It is equal to
+/// [^4]: `scFirstMakerCode` is an array from the Revolution Face Library which
+/// represents the first three bytes of a potential MAC address. It is equal to
 /// `[0x00, 0x17, 0xAB]`, or the first OUI registered to Nintendo Co., Ltd for
-/// use with the Wii.
+/// use with the Wii console.
 #[binrw]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "serde", serde(transparent))]

@@ -36,7 +36,7 @@ pub struct SaveDataStoragePlayerStatus {
     #[header_serializer(name = "mLast1upCoinNum")]
     pub last_1up_coin_num: u16,
 
-    /// The collection of binary settings.
+    /// The collection of packed binary settings.
     #[header_serializer(name = "mFlag")]
     pub flag: SaveDataStoragePlayerStatusFlag,
 }
@@ -61,7 +61,7 @@ impl Chunk for SaveDataStoragePlayerStatus {
     }
 }
 
-/// A collection of binary settings for player state.
+/// A collection of packed binary settings for player state.
 #[bitsize(8)]
 #[binrw]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

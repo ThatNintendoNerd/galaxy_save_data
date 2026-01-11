@@ -13,10 +13,10 @@ mod tests;
 /// # Algorithm
 ///
 /// Given an arbitrary data buffer, the hash algorithm processes the data as a
-/// series of signed bytes converted to 32-bit integers. Initialized to zero,
-/// the new value of the result variable will equal the sum of the converted
-/// byte and the current value of the result variable, where the latter is
-/// multiplied by the arbitrary constant `31`.
+/// series of signed bytes converted to unsigned 32-bit integers. Initialized
+/// to zero, the new value of the result variable will equal the sum of the
+/// converted byte and the current value of the result variable, where the
+/// latter is multiplied by the arbitrary constant `31`.
 ///
 /// ## Differences from the C++ Implementation
 ///
@@ -38,7 +38,7 @@ pub struct HashCode {
 
 impl HashCode {
     /// The arbitrary prime number for hash dispersion.
-    const HASH_KEY: u32 = 31;
+    const PRIME: u32 = 31;
 
     /// Creates a new `HashCode` from a raw hash.
     pub const fn from_raw(hash: u32) -> Self {
@@ -53,12 +53,12 @@ impl HashCode {
 
 impl From<&[u8]> for HashCode {
     fn from(buf: &[u8]) -> Self {
-        let mut hash: u32 = 0;
+        let mut hash = 0u32;
 
         // Each byte is first casted to a signed byte because a value like
         // 0x80u8 should convert to 0xFFFFFF80u32 instead of 0x80u32.
         for byte in buf.iter().map(|b| b.cast_signed() as u32) {
-            hash = byte.wrapping_add(hash.wrapping_mul(Self::HASH_KEY));
+            hash = byte.wrapping_add(hash.wrapping_mul(Self::PRIME));
         }
 
         Self { inner: hash }

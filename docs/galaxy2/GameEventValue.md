@@ -8,97 +8,97 @@ The default value for all values is `0`.
 
 > Glider [Jungle]/hi
 
-Represents the most significant bytes for the Wild Glide Galaxy's best race time, in frames.
+Represents the most significant bytes for the best race time in the Wild Glide Galaxy, in frames.
 
 ## グライダー[ジャングル]/lo
 
 > Glider [Jungle]/lo
 
-Represents the least significant bytes for the Wild Glide Galaxy's best race time, in frames.
+Represents the least significant bytes for the best race time in the Wild Glide Galaxy, in frames.
 
 ## グライダー[チャレンジ]/hi
 
 > Glider [Challenge]/hi
 
-Represents the most significant bytes for the Fleet Glide Galaxy's best race time, in frames.
+Represents the most significant bytes for the best race time in the Fleet Glide Galaxy, in frames.
 
 ## グライダー[チャレンジ]/lo
 
 > Glider [Challenge]/lo
 
-Represents the least significant bytes for the Fleet Glide Galaxy's best race time, in frames.
+Represents the least significant bytes for the best race time in the Fleet Glide Galaxy, in frames.
 
 ## ベストスコア[MokumokuValleyGalaxy]/lo
 
 > Best Score [MokumokuValleyGalaxy]/lo
 
-Represents the least significant bytes for The Chimp's Stomp Challenge mission's high score in the Fluffy Bluff Galaxy.
+Represents the least significant bytes for the high score in the second mission of the Fluffy Bluff Galaxy.
 
 ## ベストスコア[MokumokuValleyGalaxy]/hi
 
 > Best Score [MokumokuValleyGalaxy]/hi
 
-Represents the most significant bytes for The Chimp's Stomp Challenge mission's high score in the Fluffy Bluff Galaxy.
+Represents the most significant bytes for the high score in the second mission of the Fluffy Bluff Galaxy.
 
 ## ベストスコア[HoneyBeeVillageGalaxy]/lo
 
 > Best Score [HoneyBeeVillageGalaxy]/lo
 
-Represents the least significant bytes for The Chimp's Score Challenge mission's high score in the Honeyhop Galaxy.
+Represents the least significant bytes for the high score in the second mission of the Honeyhop Galaxy.
 
 ## ベストスコア[HoneyBeeVillageGalaxy]/hi
 
 > Best Score [HoneyBeeVillageGalaxy]/hi
 
-Represents the most significant bytes for The Chimp's Score Challenge mission's high score in the Honeyhop Galaxy.
+Represents the most significant bytes for the high score in the second mission of the Honeyhop Galaxy.
 
 ## ベストスコア[UnderGroundDangeonGalaxy]/lo
 
 > Best Score [UnderGroundDangeonGalaxy]/lo
 
-Represents the least significant bytes for The Chimp's Coin Challenge mission's high score in the Slimy Spring Galaxy.
+Represents the least significant bytes for the high score in the second mission of the Slimy Spring Galaxy.
 
 ## ベストスコア[UnderGroundDangeonGalaxy]/hi
 
 > Best Score [UnderGroundDangeonGalaxy]/hi
 
-Represents the most significant bytes for The Chimp's Coin Challenge mission's high score in the Slimy Spring Galaxy.
+Represents the most significant bytes for the high score in the second mission of the Slimy Spring Galaxy.
 
 ## ベストスコア[TwisterTowerGalaxy]/lo
 
 > Best Score [TwisterTowerGalaxy]/lo
 
-Represents the least significant bytes for The Chimp's Bowling Challenge mission's high score in the Melty Monster Galaxy.
+Represents the least significant bytes for the high score in the third mission of the Melty Monster Galaxy.
 
 ## ベストスコア[TwisterTowerGalaxy]/hi
 
 > Best Score [TwisterTowerGalaxy]/hi
 
-Represents the most significant bytes for The Chimp's Bowling Challenge mission's high score in the Melty Monster Galaxy.
+Represents the most significant bytes for the high score in the third mission of the Melty Monster Galaxy.
 
 ## ベストスコア[KachikochiLavaGalaxy]/lo
 
 > Best Score [KachikochiLavaGalaxy]/lo
 
-Represents the least significant bytes for The Chimp's Ultimate Skating Challenge mission's high score in the Shiverburn Galaxy.
+Represents the least significant bytes for the high score in the third mission of the Shiverburn Galaxy.
 
 ## ベストスコア[KachikochiLavaGalaxy]/hi
 
 > Best Score [KachikochiLavaGalaxy]/hi
 
-Represents the most significant bytes for The Chimp's Ultimate Skating Challenge mission's high score in the Shiverburn Galaxy.
+Represents the most significant bytes for the high score in the third mission of the Shiverburn Galaxy.
 
 ## ベストスコア[WhiteSnowGalaxy]/lo
 
 > Best Score [WhiteSnowGalaxy]/lo
 
-Represents the least significant bytes for The Chimp's Skating Challenge mission's high score in the Freezy Flake Galaxy.
+Represents the least significant bytes for the high score in the third mission of the Freezy Flake Galaxy.
 
 ## ベストスコア[WhiteSnowGalaxy]/hi
 
 > Best Score [WhiteSnowGalaxy]/hi
 
-Represents the most significant bytes for The Chimp's Skating Challenge mission's high score in the Freezy Flake Galaxy.
+Represents the most significant bytes for the high score in the third mission of the Freezy Flake Galaxy.
 
 ## 郵便屋[タスク手紙既読フラグ]/0
 
@@ -161,9 +161,10 @@ Represents the bit index of the most recent letter received by the mailtoad info
 
 > Postman [Cumulative Number of Deaths When Reading Peach's Letter]
 
-TBD
+Represents the number of lives lost as of reading Princess Peach's letter.
 
-TODO: Like `MissPointForLetter` from Super Mario Galaxy?
+> [!NOTE]
+> This value effectively goes unused as it is never read from; only written to with the value of [`累積死亡回数`](#累積死亡回数).
 
 ## メッセージ既読フラグ/0
 
@@ -171,7 +172,7 @@ TODO: Like `MissPointForLetter` from Super Mario Galaxy?
 
 Represents the least significant bytes for a bit field determining if a message from an actor was read by the player.
 
-Messages are arbitrarily assigned a bit index based on their last parameter.
+Messages are assigned a bit index based on their last parameter.
 
 ## メッセージ既読フラグ/1
 
@@ -179,7 +180,7 @@ Messages are arbitrarily assigned a bit index based on their last parameter.
 
 Represents the most significant bytes for a bit field determining if a message from an actor was read by the player.
 
-Messages are arbitrarily assigned a bit index based on their last parameter.
+Messages are assigned a bit index based on their last parameter.
 
 ## 累積死亡回数
 
@@ -199,19 +200,19 @@ Represents the number of game overs.
 
 > Cumulative Play Time/lo
 
-Represents the least significant bytes for the play time, in frames.
+Represents the least significant bytes for the amount of time spent actively playing the game, in frames.
 
 ## 累積プレイ時間/hi
 
 > Cumulative Play Time/hi
 
-Represents the most significant bytes for the play time, in frames.
+Represents the most significant bytes for the amount of time spent actively playing the game, in frames.
 
 ## でしゃばりルイージ出現カウンタ
 
 > Intrusive Luigi Appearance Counter
 
-Represents the number of missions completed and lives lost to allow in-galaxy Luigi to appear.
+Represents the number of missions cleared and lives lost to allow Luigi to appear on standby.
 
 This value is wrapped around the interval [0, 5].
 
@@ -219,7 +220,9 @@ This value is wrapped around the interval [0, 5].
 
 > Banker Kinopio [Interest]
 
-TBD
+Represents the number of Star Bits earned by the Banktoad to be added to the number of banked Star Bits.
+
+This value is derived from the value of the ones place from the number of Star Bits collected after clearing a mission and will be deposited when the Banktoad is talked to next.
 
 ## 顔惑星イベント番号/0
 

@@ -26,7 +26,7 @@ Sample output from a `GameData.bin` file:
 
 ## Usage
 
-The latest version is available in [Releases](https://github.com/ThatNintendoNerd/galaxy_save_data/releases/latest).
+The latest version is available from the [Releases](https://github.com/ThatNintendoNerd/galaxy_save_data/releases/latest) page.
 
 For more information, run the following command:
 

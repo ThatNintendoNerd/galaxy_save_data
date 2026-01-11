@@ -13,10 +13,10 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Debug, Default)]
 pub struct ConfigDataMii {
-    /// The collection of binary settings.
+    /// The collection of packed binary settings.
     pub flag: ConfigDataMiiFlag,
 
-    /// The unique identifier of the Mii character.
+    /// The unique identifier of the Mii.
     pub mii_id: RFLCreateID,
 
     /// The icon of the user file.
@@ -29,7 +29,7 @@ impl Chunk for ConfigDataMii {
     }
 }
 
-/// A collection of binary settings for user file icon state.
+/// A collection of packed binary settings for user file icon state.
 #[bitsize(8)]
 #[binrw]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -41,8 +41,8 @@ pub struct ConfigDataMiiFlag {
 
     /// Unused.
     ///
-    /// This flag is set if the player chooses a Mii character for their file,
-    /// but is never evaluated or cleared.
+    /// This flag is set if the player chooses a Mii for their file, but is
+    /// never tested or cleared.
     pub unk2: bool,
 
     reserved: u6,

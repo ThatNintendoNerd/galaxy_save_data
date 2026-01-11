@@ -26,20 +26,22 @@ pub struct SpinDriverPathStorage {
 
 impl SpinDriverPathStorage {
     /// Returns a reference to the [`SpinDriverPathStorageGalaxy`] corresponding to the key.
-    pub fn get(&self, key: impl Into<HashCode>) -> Option<&SpinDriverPathStorageGalaxy> {
-        let key = key.into().into_raw() as u16;
+    pub fn get(&self, galaxy_name: impl Into<HashCode>) -> Option<&SpinDriverPathStorageGalaxy> {
+        let galaxy_name = galaxy_name.into().into_raw() as u16;
 
-        self.galaxy.iter().find(|v| v.galaxy_name == key)
+        self.galaxy.iter().find(|v| v.galaxy_name == galaxy_name)
     }
 
     /// Returns a mutable reference to the [`SpinDriverPathStorageGalaxy`] corresponding to the key.
     pub fn get_mut(
         &mut self,
-        key: impl Into<HashCode>,
+        galaxy_name: impl Into<HashCode>,
     ) -> Option<&mut SpinDriverPathStorageGalaxy> {
-        let key = key.into().into_raw() as u16;
+        let galaxy_name = galaxy_name.into().into_raw() as u16;
 
-        self.galaxy.iter_mut().find(|v| v.galaxy_name == key)
+        self.galaxy
+            .iter_mut()
+            .find(|v| v.galaxy_name == galaxy_name)
     }
 }
 
@@ -249,7 +251,7 @@ impl SpinDriverPathStorageOne {
     const DRAW_RANGE_FACTOR: f32 = 256.0;
 
     /// The minimum percentage value to be considered.
-    const DRAW_RANGE_EPSILON: f32 = 0.001;
+    const DRAW_RANGE_TOLERANCE: f32 = 0.001;
 
     /// Reads the data from the given reader.
     fn read<R: Read + Seek>(reader: &mut R, zone_id: i32) -> BinResult<Self> {
@@ -276,7 +278,7 @@ impl SpinDriverPathStorageOne {
 
     /// Writes the data to the given writer.
     fn write<W: Write + Seek>(&self, writer: &mut W) -> BinResult<()> {
-        if self.draw_range < Self::DRAW_RANGE_EPSILON {
+        if self.draw_range < Self::DRAW_RANGE_TOLERANCE {
             return Ok(());
         }
 

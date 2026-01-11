@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Debug, Default)]
 pub struct ConfigDataMisc {
-    /// The collection of binary settings.
+    /// The collection of packed binary settings.
     pub flag: ConfigDataMiscFlag,
 
     /// The timestamp representing when the user file was most recently saved.
@@ -26,7 +26,7 @@ impl Chunk for ConfigDataMisc {
     }
 }
 
-/// A collection of binary settings for miscellaneous user file state.
+/// A collection of packed binary settings for miscellaneous user file state.
 #[bitsize(8)]
 #[binrw]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

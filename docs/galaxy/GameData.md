@@ -1,4 +1,4 @@
-`GameData.bin` is the name of Super Mario Galaxy's save file. It is stored in `/title/00010000/524d47##/data`, where `##` is the plaintext hexadecimal value for the letter that corresponds to the game's region (either RMG**J**, RMG**E**, RMG**P**, or RMG**K**).
+`GameData.bin` is the name of Super Mario Galaxy's save file. On Wii, it is stored in `/title/00010000/524d47##/data`, where `##` is the plaintext hexadecimal value for the letter that corresponds to the game's region (either RMG**J**, RMG**E**, RMG**P**, or RMG**K**).
 
 # Platform Differences
 
@@ -20,7 +20,7 @@ On Nintendo Switch, each data block is now padded to the next four-byte boundary
 
 ## Time
 
-On Wii, time is tracked on a per-clock cycle basis, allowing for both incredible precision and accuracy. See [OSTime](#ostime) for more information.
+On Wii, time is tracked using a register which increments every few CPU cycles, allowing for both incredible precision and accuracy. See [OSTime](#ostime) for more information.
 
 On Nintendo Switch, time is now tracked on a per-second basis. See [PosixTime](#posixtime) for more information.
 
@@ -203,21 +203,21 @@ A data block dedicated to preserving user file icon state.
 | --- | --- | --- |
 | 0x00 | [BinaryDataChunkHolderChunkData](#binarydatachunkholderchunkdata) | The supplementary information for the data block. |
 | 0x0C.0 | 1 bit | **Unused**. Never set or cleared; only tested if the last field is absent. |
-| 0x0C.1 | 1 bit | **Unused**. Never tested or cleared; only set if the icon is of a Mii character. |
+| 0x0C.1 | 1 bit | **Unused**. Never tested or cleared; only set if the icon represents a Mii. |
 | 0x0C.2 | 6 bits | **Unused**. |
-| 0x0D | [RFLCreateID](#rflcreateid) | The unique identifier of the Mii character. |
+| 0x0D | [RFLCreateID](#rflcreateid) | The unique identifier of the Mii. |
 | 0x15 | u8 | The icon of the user file. |
 
 #### RFLCreateID
 
-A unique identifier for a Mii character.
+A unique identifier for a Mii.
 
 This data type originates from the Revolution Face Library.
 
 | Offset | Type | Description |
 | --- | --- | --- |
-| 0x00.7 | 1 bit | Determines if the Mii character was not distributed by Nintendo. |
-| 0x00.6 | 1 bit | Determines if the Mii character was created on another system. |
+| 0x00.7 | 1 bit | Determines if the Mii was not distributed by Nintendo. |
+| 0x00.6 | 1 bit | Determines if the Mii was created on another system. |
 | 0x00.5 | 1 bit | **Unknown**. |
 | 0x00.4 | 1 bit | **Unused**. |
 | 0x00.3 | 28 bits | The timestamp representing when the Mii character's gender was selected. |

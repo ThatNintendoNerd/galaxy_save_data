@@ -242,49 +242,49 @@ Determines if the sequence upon first approach to Bowser's Galaxy Generator has 
 
 ## IsOpenScenarioGoroRockGalaxy3
 
-Determines if the third mission in the Boulder Bowl Galaxy is available.
+Determines if the third mission of the Boulder Bowl Galaxy is available.
 
 > [!NOTE]
 > If this flag is manually cleared after collecting the corresponding Star, the mission will remain available.
 
 ## IsOpenScenarioJungleGliderGalaxy2
 
-Determines if the second mission in the Wild Glide Galaxy is available.
+Determines if the second mission of the Wild Glide Galaxy is available.
 
 > [!NOTE]
 > If this flag is manually cleared after collecting the corresponding Star, the mission will remain available.
 
 ## IsOpenScenarioThunderFleetGalaxy3
 
-Determines if the third mission in the Space Storm Galaxy is available.
+Determines if the third mission of the Space Storm Galaxy is available.
 
 > [!NOTE]
 > If this flag is manually cleared after collecting the corresponding Star, the mission will remain available.
 
 ## IsOpenScenarioChallengeGliderGalaxy2
 
-Determines if the second mission in the Fleet Glide Galaxy is available.
+Determines if the second mission of the Fleet Glide Galaxy is available.
 
 > [!NOTE]
 > If this flag is manually cleared after collecting the corresponding Star, the mission will remain available.
 
 ## IsOpenScenarioHoneyBeeVillageGalaxy2
 
-Determines if the second mission in the Honeyhop Galaxy is available.
+Determines if the second mission of the Honeyhop Galaxy is available.
 
 > [!NOTE]
 > If this flag is manually cleared after collecting the corresponding Star, the mission will remain available.
 
 ## IsOpenScenarioUnderGroundDangeonGalaxy2
 
-Determines if the second mission in the Slimy Spring Galaxy is available.
+Determines if the second mission of the Slimy Spring Galaxy is available.
 
 > [!NOTE]
 > If this flag is manually cleared after collecting the corresponding Star, the mission will remain available.
 
 ## IsOpenScenarioMokumokuValleyGalaxy2
 
-Determines if the second mission in the Fluffy Bluff Galaxy is available.
+Determines if the second mission of the Fluffy Bluff Galaxy is available.
 
 > [!NOTE]
 > If this flag is manually cleared after collecting the corresponding Star, the mission will remain available.
@@ -353,7 +353,7 @@ Determines if the Grandmaster Galaxy is available.
 Determines if the message following the player's partial completion of the game was sent to the Wii Message Board.
 
 > [!NOTE]
-> This flag is only set if the player has accumulated less than 120 Stars after collecting the Grand Star from Bowser's Galaxy Generator and both `ノーマルエンディング実行` and `スター120個エンディング実行` are cleared.
+> This flag is only set if the player has accumulated less than 120 Stars after collecting the Grand Star from Bowser's Galaxy Generator and both [`ノーマルエンディング実行`](#ノーマルエンディング実行) and [`スター120個エンディング実行`](#スター120個エンディング実行) are cleared.
 
 ## コンプリートメール送信
 
@@ -389,7 +389,7 @@ Determines if Luigi was played as.
 
 Determines if Luigi can appear on standby in a mission he has not appeared in before.
 
-This flag is set after Luigi first talks to Mario on Starship Mario and when `でしゃばりルイージ出現カウンタ` is subsequently a multiple of six.
+This flag is set after Luigi first talks to Mario on Starship Mario and when [`でしゃばりルイージ出現カウンタ`](https://github.com/ThatNintendoNerd/galaxy_save_data/blob/main/docs/galaxy2/GameEventValue.md#でしゃばりルイージ出現カウンタ) is subsequently a multiple of six.
 
 ## ゲームオーバーで終了
 

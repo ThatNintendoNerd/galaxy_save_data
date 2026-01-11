@@ -16,9 +16,9 @@ pub struct GameDataPlayerStatus {
     ///
     /// Values are derived from a BCSV file hardcoded into the game's
     /// executable. It associates informal names of events with values. There
-    /// does not appear to be any significance behind most values other than
-    /// events which occur later in the game assuming a value greater than
-    /// those before it.
+    /// does not appear to be any significance behind most `progress` values
+    /// other than events which occur later in the game assuming a value greater
+    /// than those before it.
     ///
     /// The BCSV file data converted to table format is as follows, where
     /// strings encoded in Shift JIS have been transcoded to UTF-8:

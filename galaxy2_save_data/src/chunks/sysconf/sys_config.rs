@@ -34,11 +34,11 @@ pub struct SysConfigData {
     #[header_serializer(name = "mSentBytes")]
     pub sent_bytes: u32,
 
-    /// The number of Star Bits stored with the banktoad.
+    /// The number of banked Star Bits.
     #[header_serializer(name = "mBankStarPieceNum")]
     pub bank_star_piece_num: u16,
 
-    /// The greatest number of Star Bits stored with the banktoad.
+    /// The greatest number of banked Star Bits.
     #[header_serializer(name = "mBankStarPieceMax")]
     pub bank_star_piece_max: u16,
 
@@ -46,7 +46,7 @@ pub struct SysConfigData {
     #[header_serializer(name = "mGiftedPlayerLeft")]
     pub gifted_player_left: u8,
 
-    /// The sender of extra lives' hashed user file name.
+    /// The sender of extra lives' hashed user file name, truncated to the least significant 16 bits.
     #[header_serializer(name = "mGiftedFileNameHash")]
     pub gifted_file_name_hash: u16,
 }

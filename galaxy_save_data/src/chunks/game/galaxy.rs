@@ -31,17 +31,22 @@ pub struct GameDataAllGalaxyStorage {
 
 impl GameDataAllGalaxyStorage {
     /// Returns a reference to the [`GameDataSomeGalaxyStorage`] corresponding to the given key.
-    pub fn get(&self, key: impl Into<HashCode>) -> Option<&GameDataSomeGalaxyStorage> {
-        let key = key.into().into_raw() as u16;
+    pub fn get(&self, galaxy_name: impl Into<HashCode>) -> Option<&GameDataSomeGalaxyStorage> {
+        let galaxy_name = galaxy_name.into().into_raw() as u16;
 
-        self.galaxy.iter().find(|v| v.galaxy_name == key)
+        self.galaxy.iter().find(|v| v.galaxy_name == galaxy_name)
     }
 
     /// Returns a mutable reference to the [`GameDataSomeGalaxyStorage`] corresponding to the given key.
-    pub fn get_mut(&mut self, key: impl Into<HashCode>) -> Option<&mut GameDataSomeGalaxyStorage> {
-        let key = key.into().into_raw() as u16;
+    pub fn get_mut(
+        &mut self,
+        galaxy_name: impl Into<HashCode>,
+    ) -> Option<&mut GameDataSomeGalaxyStorage> {
+        let galaxy_name = galaxy_name.into().into_raw() as u16;
 
-        self.galaxy.iter_mut().find(|v| v.galaxy_name == key)
+        self.galaxy
+            .iter_mut()
+            .find(|v| v.galaxy_name == galaxy_name)
     }
 }
 
