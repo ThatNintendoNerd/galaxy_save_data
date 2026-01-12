@@ -61,6 +61,8 @@ TamakoroExLv2Galaxy
 TearDropGalaxy
 TeresaMario2DGalaxy
 TicoGalaxyAlreadyTalk
+TotalPlayTime
+TotalPlayTime/hi
 TransformationExGalaxy
 TriLegLv1Galaxy
 ViewCompleteEnding

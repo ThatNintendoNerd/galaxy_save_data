@@ -18,6 +18,10 @@ pub struct ConfigDataMisc {
 
     /// The timestamp representing when the user file was most recently saved.
     pub last_modified: Time,
+    /*
+    /// Determines if Assist Mode is enabled.
+    pub is_assist_mode: bool,
+    */
 }
 
 impl Chunk for ConfigDataMisc {

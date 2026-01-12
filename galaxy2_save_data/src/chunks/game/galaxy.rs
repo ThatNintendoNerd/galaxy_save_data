@@ -145,6 +145,19 @@ pub struct SaveDataStorageGalaxyScenario {
     /// The collection of packed binary settings.
     #[header_serializer(name = "mFlag")]
     pub flag: SaveDataStorageGalaxyScenarioFlag,
+    /*
+    /// The number of times cleared.
+    #[header_serializer(name = "mClearStageNum")]
+    pub clear_stage_num: u16,
+
+    // TODO: Unused?
+    #[header_serializer(name = "mMissStageNum")]
+    pub miss_stage_num: u16,
+
+    /// The amount of time spent playing, in seconds.
+    #[header_serializer(name = "mTotalPlaySecond")]
+    pub total_play_second: u16,
+    */
 }
 
 /// The collection of packed binary settings for a mission.

@@ -77,4 +77,13 @@ pub struct GameDataSomeGalaxyStorage {
     /// The greatest number of collected coins for each mission.
     #[header_serializer(name = "mMaxCoinNum")]
     pub max_coin_num: [u16; u8::BITS as usize],
+    /*
+    /// The number of times each base mission was cleared.
+    #[header_serializer(name = "mClearStageNum")]
+    pub clear_stage_num: [u16; u8::BITS as usize],
+
+    /// The number of lives lost for each base mission.
+    #[header_serializer(name = "mMissStageNum")]
+    pub miss_stage_num: [u16; u8::BITS as usize],
+    */
 }

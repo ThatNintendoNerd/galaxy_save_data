@@ -174,6 +174,20 @@ This value is clamped to the interval [0, 9999].
 
 The default value is `0`.
 
+## TotalPlayTime/hi
+
+> [!NOTE]
+> The following Game Event Value only exists in the standalone Nintendo Switch release of the game.
+
+Represents the most significant bytes for the amount of time spent actively playing the game, in frames.
+
+## TotalPlayTime
+
+> [!NOTE]
+> The following Game Event Value only exists in the standalone Nintendo Switch release of the game.
+
+Represents the least significant bytes for the amount of time spent actively playing the game, in frames.
+
 ## Comet1Status
 
 Represents the state of the Prankster Comet in the Terrace.

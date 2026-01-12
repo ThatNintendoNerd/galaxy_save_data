@@ -96,7 +96,7 @@ impl Chunk for SaveDataStorageTicoFat {
     fn hash_code() -> HashCode {
         let hash = HashCode::from("SaveDataStorageTicoFat")
             .into_raw()
-            .wrapping_add(0x120);
+            .wrapping_add(0x120); // TODO: 0x1E0 on Nintendo Switch
 
         HashCode::from_raw(hash)
     }
