@@ -3,7 +3,10 @@
 use std::io::{Read, Seek, SeekFrom, Write};
 
 use binrw::{BinRead, BinResult, BinWrite, Endian, binread, binrw};
-use galaxy_save_core::{bin::Chunk, hash::HashCode};
+use galaxy_save_core::{
+    bin::Chunk,
+    hash::{HashCode, HashCode16},
+};
 
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
@@ -27,7 +30,7 @@ pub struct SpinDriverPathStorage {
 impl SpinDriverPathStorage {
     /// Returns a reference to the [`SpinDriverPathStorageGalaxy`] corresponding to the key.
     pub fn get(&self, galaxy_name: impl Into<HashCode>) -> Option<&SpinDriverPathStorageGalaxy> {
-        let galaxy_name = galaxy_name.into().into_raw() as u16;
+        let galaxy_name = HashCode16::from(galaxy_name.into());
 
         self.galaxy.iter().find(|v| v.galaxy_name == galaxy_name)
     }
@@ -37,7 +40,7 @@ impl SpinDriverPathStorage {
         &mut self,
         galaxy_name: impl Into<HashCode>,
     ) -> Option<&mut SpinDriverPathStorageGalaxy> {
-        let galaxy_name = galaxy_name.into().into_raw() as u16;
+        let galaxy_name = HashCode16::from(galaxy_name.into());
 
         self.galaxy
             .iter_mut()
@@ -57,7 +60,7 @@ impl Chunk for SpinDriverPathStorage {
 #[derive(Debug)]
 pub struct SpinDriverPathStorageGalaxy {
     /// The hashed internal name of the galaxy, truncated to the least significant 16 bits.
-    galaxy_name: u16,
+    galaxy_name: HashCode16,
 
     /// The size of the serialized struct, in bytes.
     #[br(temp)]

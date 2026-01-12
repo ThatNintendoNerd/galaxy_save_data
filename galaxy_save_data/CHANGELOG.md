@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Serialization from `HashCode` to label.
+- Deserialization from label to `HashCode`.
+
 ### Changed
 
 - Bump `bilge` to 0.3.0.

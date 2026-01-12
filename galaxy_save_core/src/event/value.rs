@@ -3,7 +3,7 @@ use binrw::binrw;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
-use crate::hash::HashCode;
+use crate::hash::{HashCode, HashCode16};
 
 /// A key-value pair for a 16-bit unsigned integer.
 #[binrw]
@@ -11,7 +11,7 @@ use crate::hash::HashCode;
 #[derive(Debug)]
 pub struct GameEventValue {
     /// The hashed key, truncated to the least significant 16 bits.
-    key: u16,
+    key: HashCode16,
 
     /// The associated value.
     value: u16,
@@ -20,13 +20,13 @@ pub struct GameEventValue {
 impl GameEventValue {
     /// Creates a new `GameEventValue`.
     pub fn new(key: impl Into<HashCode>, value: u16) -> Self {
-        let key = key.into().into_raw() as u16;
+        let key = HashCode16::from(key.into());
 
         Self { key, value }
     }
 
     /// Returns the hashed key.
-    const fn key(&self) -> u16 {
+    const fn key(&self) -> HashCode16 {
         self.key
     }
 
@@ -43,6 +43,6 @@ impl GameEventValue {
 
 impl PartialEq<HashCode> for GameEventValue {
     fn eq(&self, other: &HashCode) -> bool {
-        self.key() == other.into_raw() as u16
+        self.key() == *other
     }
 }

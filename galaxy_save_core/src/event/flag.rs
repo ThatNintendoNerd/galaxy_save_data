@@ -10,7 +10,7 @@ use crate::hash::HashCode;
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(
     feature = "serde",
-    serde(from = "ExpandedGameEventFlag", into = "ExpandedGameEventFlag")
+    serde(try_from = "ExpandedGameEventFlag", into = "ExpandedGameEventFlag")
 )]
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
@@ -22,15 +22,18 @@ impl GameEventFlag {
     /// The bitmask for the hashed key.
     const KEY_MASK: u16 = !Self::VALUE_MASK;
 
+    /// The bit width of the hashed key.
+    const KEY_WIDTH: u32 = u16::BITS - 1;
+
     /// The bitmask for the associated value.
-    const VALUE_MASK: u16 = 1 << (u16::BITS - 1);
+    const VALUE_MASK: u16 = 1 << Self::KEY_WIDTH;
 
     /// The bit shift operand for the associated value.
-    const VALUE_SHIFT: u32 = Self::VALUE_MASK.trailing_zeros();
+    const VALUE_SHIFT: u32 = Self::KEY_WIDTH;
 
     /// Creates a new `GameEventFlag`.
     pub fn new(key: impl Into<HashCode>, value: bool) -> Self {
-        let key = key.into().into_raw() as u16 & Self::KEY_MASK;
+        let key = key.into().trunc() & Self::KEY_MASK;
         let value = (value as u16) << Self::VALUE_SHIFT;
 
         Self { inner: key | value }
@@ -48,39 +51,43 @@ impl GameEventFlag {
 
     /// Updates the associated value.
     pub const fn set(&mut self, value: bool) {
-        self.inner = (self.inner & Self::KEY_MASK) | ((value as u16) << Self::VALUE_SHIFT);
+        self.inner = self.key() | ((value as u16) << Self::VALUE_SHIFT);
     }
 }
 
 impl PartialEq<HashCode> for GameEventFlag {
     fn eq(&self, other: &HashCode) -> bool {
-        self.key() == other.into_raw() as u16 & Self::KEY_MASK
+        self.key() == other.trunc() & Self::KEY_MASK
     }
 }
 
 #[cfg(feature = "serde")]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 struct ExpandedGameEventFlag {
-    key: u16,
+    key: String,
     value: bool,
 }
 
 #[cfg(feature = "serde")]
 impl From<GameEventFlag> for ExpandedGameEventFlag {
     fn from(flag: GameEventFlag) -> Self {
+        let hash = HashCode::from_raw(flag.key().into());
+        let label = hash.to_label(Some(GameEventFlag::KEY_WIDTH));
+
         Self {
-            key: flag.key(),
+            key: label,
             value: flag.value(),
         }
     }
 }
 
 #[cfg(feature = "serde")]
-impl From<ExpandedGameEventFlag> for GameEventFlag {
-    fn from(flag: ExpandedGameEventFlag) -> Self {
-        let key = flag.key & Self::KEY_MASK;
-        let value = (flag.value as u16) << Self::VALUE_SHIFT;
+impl TryFrom<ExpandedGameEventFlag> for GameEventFlag {
+    type Error = crate::hash::FromLabelError;
 
-        Self { inner: key | value }
+    fn try_from(flag: ExpandedGameEventFlag) -> Result<Self, Self::Error> {
+        let hash = HashCode::from_label(&flag.key)?;
+
+        Ok(Self::new(hash, flag.value))
     }
 }

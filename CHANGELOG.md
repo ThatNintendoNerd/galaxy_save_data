@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Conversion of `HashCode` to label and vice versa from a labels file.
+
 ### Fixed
 
 - Incorrect endianness for save files from NVIDIA Shield TV.

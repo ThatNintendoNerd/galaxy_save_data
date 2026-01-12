@@ -53,9 +53,23 @@ jobs:
       - name: Create Artifact
         run: |
           if [[ startsWith(matrix.platform, 'windows') ]]; then
-            Compress-Archive -path galaxy_save_data_json.exe, galaxy2_save_data_json.exe -destinationPath ${{ env.ARTIFACT_NAME }}.zip
+            New-Item -Name "galaxy_save_data_json" -ItemType "Directory"
+            Move-Item -Path "galaxy_save_data_json.exe" -Destination "galaxy_save_data_json"
+            Copy-Item -Path "${{ github.workspace }}\galaxy_save_data\resources\labels.txt" -Destination "galaxy_save_data_json"
+            New-Item -Name "galaxy2_save_data_json" -ItemType "Directory"
+            Move-Item -Path "galaxy2_save_data_json.exe" -Destination "galaxy2_save_data_json"
+            Copy-Item -Path "${{ github.workspace }}\galaxy2_save_data\resources\labels.txt" -Destination "galaxy2_save_data_json"
+            Compress-Archive -path galaxy_save_data_json, galaxy2_save_data_json -destinationPath ${{ env.ARTIFACT_NAME }}.zip
           else
-            zip ${{ env.ARTIFACT_NAME }}.zip galaxy_save_data_json galaxy2_save_data_json
+            mkdir galaxy_save_data
+            mv galaxy_save_data_json !$
+            mv !$ !^
+            cp ${{ github.workspace }}/galaxy_save_data/resources/labels.txt !$
+            mkdir galaxy2_save_data
+            mv galaxy2_save_data_json !$
+            mv !$ !^
+            cp ${{ github.workspace }}/galaxy2_save_data/resources/labels.txt !$
+            zip -r ${{ env.ARTIFACT_NAME }}.zip galaxy_save_data_json/ galaxy2_save_data_json/
           fi
         working-directory: ${{ env.ARTIFACT_DIR }}
       - name: Upload Artifact

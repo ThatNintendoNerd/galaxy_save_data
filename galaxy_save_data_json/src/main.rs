@@ -4,11 +4,12 @@ use std::{
 };
 
 use clap::Parser;
+use galaxy_save_core::hash::{HashCodeMap, ParseLabelError};
 use galaxy_save_data::save::SaveDataFile;
 
 mod cli;
 
-use cli::{Args, Platform};
+use cli::{Args, LabelEncoding, Platform};
 
 fn read_data_write_json<P: AsRef<Path> + ToString>(
     input_path: P,
@@ -19,7 +20,7 @@ fn read_data_write_json<P: AsRef<Path> + ToString>(
     let result = match platform {
         Platform::Wii | Platform::ShieldTv => {
             if check && let Err(error) = SaveDataFile::check_be_file(&input_path) {
-                eprintln!("failed to validate file: {error}");
+                eprintln!("Failed to validate save file: {error}");
                 return;
             }
 
@@ -27,7 +28,7 @@ fn read_data_write_json<P: AsRef<Path> + ToString>(
         }
         Platform::Switch => {
             if check && let Err(error) = SaveDataFile::check_le_file(&input_path) {
-                eprintln!("failed to validate file: {error}");
+                eprintln!("Failed to validate save file: {error}");
                 return;
             }
 
@@ -39,12 +40,14 @@ fn read_data_write_json<P: AsRef<Path> + ToString>(
         Ok(save_data) => {
             let output_path = output_path
                 .map(PathBuf::from)
-                .unwrap_or_else(|| PathBuf::from(input_path.to_string() + ".json"));
+                .unwrap_or_else(|| input_path.as_ref().with_added_extension("json"));
             let json = serde_json::to_string_pretty(&save_data).unwrap();
 
-            fs::write(output_path, json).expect("failed to write JSON file");
+            if let Err(error) = fs::write(output_path, json) {
+                eprintln!("Failed to write JSON file: {error}");
+            }
         }
-        Err(error) => eprintln!("{error:?}"),
+        Err(error) => eprintln!("{error}"),
     }
 }
 
@@ -65,14 +68,39 @@ fn read_json_write_data<P: AsRef<Path>>(
                 Platform::Switch => save_data.write_le_file(output_path),
             };
 
-            result.expect("failed to write GameData.bin file");
+            if let Err(error) = result {
+                eprintln!("Failed to write save file: {error}");
+            }
         }
-        Err(error) => eprintln!("{error:?}"),
+        Err(error) => eprintln!("{error}"),
     }
+}
+
+fn try_read_labels(
+    labels_path: Option<String>,
+    platform: Platform,
+    strict: bool,
+) -> Result<(), ParseLabelError> {
+    let labels_path = PathBuf::from(labels_path.unwrap_or("labels.txt".into()));
+    let label_map_binding = HashCodeMap::get();
+    let mut label_map = label_map_binding.lock();
+
+    match LabelEncoding::from(platform) {
+        LabelEncoding::ShiftJis => label_map.read_shift_jis(labels_path)?,
+        LabelEncoding::Utf8 => label_map.read_utf8(labels_path)?,
+    }
+
+    label_map.set_strict(strict);
+
+    Ok(())
 }
 
 fn main() {
     let args = Args::parse();
+
+    if let Err(error) = try_read_labels(args.labels, args.platform, args.strict) {
+        eprintln!("Failed to read labels file: {error}");
+    }
 
     match Path::new(&args.input)
         .extension()

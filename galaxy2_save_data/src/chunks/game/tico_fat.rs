@@ -1,7 +1,10 @@
 //! Types associated with Hungry Luma state.
 
 use binrw::binrw;
-use galaxy_save_core::{bin::Chunk, hash::HashCode};
+use galaxy_save_core::{
+    bin::Chunk,
+    hash::{HashCode, HashCode16},
+};
 
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
@@ -21,7 +24,7 @@ pub struct SaveDataStorageTicoFat {
 
     /// The array of hashed internal galaxy names with satisfied coin-dependent
     /// Hungry Lumas, truncated to the least significant 16 bits.
-    coin_galaxy_name: [u16; Self::COIN_GALAXY_NAME_NUM],
+    coin_galaxy_name: [HashCode16; Self::COIN_GALAXY_NAME_NUM],
 }
 
 impl SaveDataStorageTicoFat {
@@ -48,27 +51,27 @@ impl SaveDataStorageTicoFat {
 
     /// Determines if a Hungry Luma in a galaxy was fed a satisfactory number of coins.
     pub fn is_coin_feed(&self, galaxy_name: impl Into<HashCode>) -> bool {
-        let galaxy_name = galaxy_name.into().into_raw() as u16;
+        let galaxy_name = HashCode16::from(galaxy_name.into());
 
         self.coin_galaxy_name.contains(&galaxy_name)
     }
 
     /// Registers a galaxy as having a Hungry Luma fed a satisfactory number of coins.
     pub fn on_coin_feed(&mut self, galaxy_name: impl Into<HashCode>) {
-        let galaxy_name = galaxy_name.into().into_raw() as u16;
+        let galaxy_name = HashCode16::from(galaxy_name.into());
 
         if self.coin_galaxy_name.contains(&galaxy_name) {
             return;
         }
 
-        if let Some(hash) = self.coin_galaxy_name.iter_mut().find(|h| **h == 0) {
+        if let Some(hash) = self.coin_galaxy_name.iter_mut().find(|h| h.into_raw() == 0) {
             *hash = galaxy_name;
         }
     }
 
     /// Omits a galaxy from having a Hungry Luma fed a satisfactory number of coins.
     pub fn off_coin_feed(&mut self, galaxy_name: impl Into<HashCode>) {
-        let galaxy_name = galaxy_name.into().into_raw() as u16;
+        let galaxy_name = HashCode16::from(galaxy_name.into());
         let Some(position) = self
             .coin_galaxy_name
             .iter_mut()
@@ -77,10 +80,10 @@ impl SaveDataStorageTicoFat {
             return;
         };
 
-        self.coin_galaxy_name[position] = 0;
+        self.coin_galaxy_name[position] = Default::default();
 
         for i in position..Self::COIN_GALAXY_NAME_NUM - 1 {
-            if self.coin_galaxy_name[i + 1] == 0 {
+            if self.coin_galaxy_name[i + 1].into_raw() == 0 {
                 break;
             }
 

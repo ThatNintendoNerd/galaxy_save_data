@@ -3,7 +3,7 @@
 use binrw::binrw;
 use galaxy_save_core::{
     bin::{BinaryDataContentHeaderSerializer, Chunk, HeaderSerializer},
-    hash::HashCode,
+    hash::{HashCode, HashCode16},
     time::Time,
 };
 
@@ -48,7 +48,7 @@ pub struct SysConfigData {
 
     /// The sender of extra lives' hashed user file name, truncated to the least significant 16 bits.
     #[header_serializer(name = "mGiftedFileNameHash")]
-    pub gifted_file_name_hash: u16,
+    pub gifted_file_name_hash: HashCode16,
 }
 
 impl Chunk for SysConfigData {

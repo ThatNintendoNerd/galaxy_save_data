@@ -6,5 +6,6 @@ edition = "2024"
 
 [dependencies]
 clap.workspace = true
-galaxy_save_data = { path = "../galaxy_save_data", features = ["serde"] }
+galaxy_save_core = { path = "../galaxy_save_core", version = "^0.1.0" }
+galaxy_save_data = { path = "../galaxy_save_data", version = "^0.1.0", features = ["serde"] }
 serde_json.workspace = true

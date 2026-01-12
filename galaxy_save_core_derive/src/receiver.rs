@@ -70,7 +70,7 @@ impl HeaderSerializerField {
         let key = self.name.as_ref().unwrap();
         let quote = quote! {
             galaxy_save_core::bin::BinaryDataContentAttribute {
-                key: galaxy_save_core::hash::HashCode::from(#key).into_raw() as u16,
+                key: galaxy_save_core::hash::HashCode16::from(#key),
                 offset: #(#offset)+*
             }
         };

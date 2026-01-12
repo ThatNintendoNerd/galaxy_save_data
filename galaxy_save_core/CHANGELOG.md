@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `HashCode::trunc`: Returns the least significant 16 bits of a `HashCode`.
+- `HashCode::from_hex_str`: Converts a hexadecimal string into a `HashCode`.
+- `HashCode::from_label`: Converts a label or hexadecimal string into a `HashCode`.
+- `HashCode::to_label`: Converts a `HashCode` back to its original label, or hexadecimal if not found.
+- `HashCode16`: The wrapper type for the result of the hash function, truncated to the least significant 16 bits.
+- `HashCodeMap`: A container to associate hashes with their original label and vice versa.
+
 ### Changed
 
 - Bump `serde` to 1.0.228.

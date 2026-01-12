@@ -3,7 +3,7 @@
 use binrw::binrw;
 use galaxy_save_core::{
     bin::{BinaryDataContentHeaderSerializer, Chunk, HeaderSerializer},
-    hash::HashCode,
+    hash::{HashCode, HashCode16},
 };
 
 #[cfg(feature = "serde")]
@@ -32,7 +32,7 @@ pub struct GameDataAllGalaxyStorage {
 impl GameDataAllGalaxyStorage {
     /// Returns a reference to the [`GameDataSomeGalaxyStorage`] corresponding to the given key.
     pub fn get(&self, galaxy_name: impl Into<HashCode>) -> Option<&GameDataSomeGalaxyStorage> {
-        let galaxy_name = galaxy_name.into().into_raw() as u16;
+        let galaxy_name = HashCode16::from(galaxy_name.into());
 
         self.galaxy.iter().find(|v| v.galaxy_name == galaxy_name)
     }
@@ -42,7 +42,7 @@ impl GameDataAllGalaxyStorage {
         &mut self,
         galaxy_name: impl Into<HashCode>,
     ) -> Option<&mut GameDataSomeGalaxyStorage> {
-        let galaxy_name = galaxy_name.into().into_raw() as u16;
+        let galaxy_name = HashCode16::from(galaxy_name.into());
 
         self.galaxy
             .iter_mut()
@@ -63,7 +63,7 @@ impl Chunk for GameDataAllGalaxyStorage {
 pub struct GameDataSomeGalaxyStorage {
     /// The hashed internal name of the galaxy, truncated to the least significant 16 bits.
     #[header_serializer(name = "mGalaxyName")]
-    galaxy_name: u16,
+    galaxy_name: HashCode16,
 
     /// The flags representing the Star collection status for each mission.
     #[header_serializer(name = "mPowerStarFlag")]

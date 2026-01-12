@@ -10,8 +10,11 @@ license = "MIT"
 autobins = false
 
 [dependencies]
+bimap = "0.6.3"
 binrw.workspace = true
+encoding_rs = "0.8.35"
 galaxy_save_core_derive = { path = "../galaxy_save_core_derive", version = "^0.1.0" }
+parking_lot = "0.12.5"
 serde = { workspace = true, optional = true }
 thiserror = "2.0.17"
 

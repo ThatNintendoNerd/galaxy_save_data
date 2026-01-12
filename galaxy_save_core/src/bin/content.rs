@@ -5,6 +5,8 @@ use binrw::binrw;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
+use crate::hash::HashCode16;
+
 /// The dynamic reader/writer for the content of a data block.
 #[binrw]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -47,7 +49,7 @@ where
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct BinaryDataContentAttribute {
     /// The hashed name of the serialized field, truncated to the least significant 16 bits.
-    pub key: u16,
+    pub key: HashCode16,
 
     /// The offset to the field in bytes, relative to the start of the serialized field data.
     pub offset: u16,
