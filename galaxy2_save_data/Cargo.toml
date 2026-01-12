@@ -1,6 +1,6 @@
 [package]
 name = "galaxy2_save_data"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["ThatNintendoNerd"]
 edition = "2024"
 description = "Reading and writing GameData.bin files from Super Mario Galaxy 2"
@@ -11,7 +11,7 @@ license = "MIT"
 [dependencies]
 bilge.workspace = true
 binrw.workspace = true
-galaxy_save_core = { path = "../galaxy_save_core", version = "^0.1.0" }
+galaxy_save_core = { path = "../galaxy_save_core", version = "^0.2.0" }
 serde = { workspace = true, optional = true }
 
 [features]

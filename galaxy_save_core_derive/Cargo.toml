@@ -1,6 +1,6 @@
 [package]
 name = "galaxy_save_core_derive"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["ThatNintendoNerd"]
 edition = "2024"
 description = "Defining derive macros for common traits used in the save data of Super Mario Galaxy and Super Mario Galaxy 2"
