@@ -1,7 +1,7 @@
 //! Types associated with World Map state.
 
 use binrw::binrw;
-use galaxy_save_core::{bin::Chunk, hash::HashCode};
+use galaxy_save_core::{array::BitArray8, bin::Chunk, hash::HashCode};
 
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug)]
 pub struct SaveDataStorageWorldMap {
     /// The flags representing the Star Barrier passage status for each world.
-    pub star_check_point_flag: [u8; Self::WORLD_CAPACITY],
+    pub star_check_point_flag: [BitArray8; Self::WORLD_CAPACITY],
 
     /// The positive world number currently being navigated.
     pub world_no: u8,

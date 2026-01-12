@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `HashCode::to_label`: Converts a `HashCode` back to its original label, or hexadecimal if not found.
 - `HashCode16`: The wrapper type for the result of the hash function, truncated to the least significant 16 bits.
 - `HashCodeMap`: A container to associate hashes with their original label and vice versa.
+- `BitArray8`: A contiguous space-efficient array of 8 bits.
 
 ### Changed
 

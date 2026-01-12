@@ -2,6 +2,7 @@
 
 use binrw::binrw;
 use galaxy_save_core::{
+    array::BitArray8,
     bin::{BinaryDataContentHeaderSerializer, Chunk, HeaderSerializer},
     hash::{HashCode, HashCode16},
 };
@@ -67,11 +68,11 @@ pub struct GameDataSomeGalaxyStorage {
 
     /// The flags representing the Star collection status for each mission.
     #[header_serializer(name = "mPowerStarFlag")]
-    pub power_star_flag: u8,
+    pub power_star_flag: BitArray8,
 
     /// The flags representing the selection status for each base mission.
     #[header_serializer(name = "mFirstPlayFlag")]
-    pub first_play_flag: u8,
+    pub first_play_flag: BitArray8,
 
     /// The greatest number of collected coins for each mission.
     #[header_serializer(name = "mMaxCoinNum")]

@@ -3,6 +3,7 @@
 //! galaxy_save_core is a library for defining common types and traits used in
 //! the save files of both Super Mario Galaxy games.
 
+pub mod array;
 pub mod bin;
 pub mod event;
 pub mod face;

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump `bilge` to 0.3.0.
 - Bump `serde` to 1.0.228.
 - Improve serialization for `ConfigDataMiiFlag`.
+- Improve serialization for bit arrays.
 
 ## [0.1.0] - 2025-08-20
 
