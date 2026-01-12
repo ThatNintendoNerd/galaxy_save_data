@@ -6,7 +6,7 @@ on:
       - created
   workflow_dispatch: null
 env:
-  BUILD_PROFILE: release
+  BUILD_PROFILE: release-lto
 jobs:
   build:
     strategy:
